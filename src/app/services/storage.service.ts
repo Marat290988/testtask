@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-export type Post = {userId: number, id: number, title: string};
+export type Post = {userId: number, id: number, title: string, body: string};
 export type Photo = {albumId: number, id: number, thumbnailUrl: string, title: string, url: string};
 
 @Injectable({

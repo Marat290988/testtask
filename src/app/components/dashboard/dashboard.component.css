@@ -1,0 +1,33 @@
+.dashboard-container {
+  display: flex;
+  justify-content: center;
+  padding: 15px 3px;
+  flex-wrap: wrap;
+  align-items: start;
+  height: 100%;
+}
+
+.dashboard-card {
+  max-width: 320px;
+  width: 100%;
+}
+
+.hide-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 12px;
+}
+
+.max-height {
+  max-height: calc(100% - 30px);
+}
+
+.overflow {
+  height: calc(100% - 40px);
+  overflow-y: auto;
+}
+
+.photo {
+  max-width: 81px;
+}

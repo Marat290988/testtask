@@ -1,1 +1,55 @@
-<p>dashboard works!</p>
+<div class="dashboard-container">
+  <app-loader *ngIf="loader"></app-loader>
+
+  <ng-container *ngIf="!loader">
+
+    <div class="card dashboard-card me-4">
+      <div class="card-header">
+        Statistics
+      </div>
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div>
+            <span>{{this.storage.postQty}}</span> Posts
+          </div>
+          <div>
+            <span>{{this.storage.albumQty}}</span> Albums
+          </div>
+          <div>
+            <span>{{this.storage.photoQty}}</span> Photos
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card dashboard-card me-4 max-height">
+      <div class="card-header">
+        Latest Posts
+      </div>
+      <div class="card-body overflow">
+        <ng-container *ngFor="let post of storage.posts.slice(storage.posts.length-20)">
+          <div class="hide-text" style="color: rgb(3, 141, 221)">{{post.title}}</div>
+          <div class="hide-text mb-1">{{post.body}}</div>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="card dashboard-card max-height">
+      <div class="card-header">
+        Recent Photos
+      </div>
+      <div class="card-body overflow">
+        <div class="d-flex flex-wrap justify-content-center">
+          <ng-container *ngFor="let photo of storage.photos.slice(storage.photos.length-50)">
+            <div class="photo me-2">
+              <img [src]="photo.thumbnailUrl" style="height: auto; width: 100%; display: block;">
+              <div class="hide-text mb-1">{{photo.title}}</div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+
+  </ng-container>
+
+</div>
