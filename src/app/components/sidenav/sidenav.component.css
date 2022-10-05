@@ -1,0 +1,11 @@
+.nav-title {
+  font-size: 22px;
+}
+
+:host {
+  height: 100%;
+}
+
+nav {
+  height: 100%;
+}

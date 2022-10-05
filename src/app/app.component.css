@@ -1,0 +1,17 @@
+.main {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+}
+
+.main-block {
+  flex-grow: 1;
+}
+
+.main-head>p, .main-head>h3 {
+  margin-left: 25px;
+}
+
+.router {
+  height: calc(100% - 113.6px);
+}

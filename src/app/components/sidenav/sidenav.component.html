@@ -1,0 +1,10 @@
+<nav class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+  <h2 class="nav-title">My App</h2>
+  <hr>
+  <ul class="nav nav-pills flex-column mb-auto">
+    <li *ngFor="let nav of navData" class="nav-item">
+      <a [routerLink]="nav.route" class="nav-link text-white">{{ nav.title }}</a> 
+      <!-- active -->
+    </li>
+  </ul>
+</nav>
