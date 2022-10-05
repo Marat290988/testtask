@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Post, StorageService } from 'src/app/services/storage.service';
+import { RouteData } from '../sidenav/sidenav.component';
 
 @Component({
   selector: 'app-posts',
@@ -7,9 +9,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostsComponent implements OnInit {
 
-  constructor() { }
+  navData: RouteData[] = [
+    {title: 'Dashboard', route: '', state: true},
+    {title: 'Posts', route: 'posts', state: false}
+  ]
+
+  viewPosts: Post[] = [];
+  loader = false;
+  titleTable: string[] = [
+    'ID', 'User', 'Title', 'Content'
+  ];
+
+  constructor(
+    public storage: StorageService
+  ) { }
 
   ngOnInit(): void {
+    if (this.storage.posts.length === 0) {
+      this.loader = true;
+      const subs = this.storage.getAllData()
+        .subscribe(()=> {
+          this.loader = false;
+          this.setViewPosts(1);
+          subs.unsubscribe();
+        })
+    } else {
+      this.setViewPosts(1);
+    }
+    console.log(this.storage.posts)
+  }
+
+  setViewPosts(page: number): void {
+    const index = page * 5;
+    this.viewPosts = this.storage.posts.slice(index-5, index);
   }
 
 }

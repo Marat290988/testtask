@@ -1,8 +1,8 @@
 :host {
   position: absolute;
-  position: absolute;
   z-index: 100;
-  top: calc(50% - 55px);
+  top: calc(50% - 100px);
+  left: 50%;
 }
 
 .loader,

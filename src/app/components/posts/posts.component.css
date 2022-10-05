@@ -1,0 +1,36 @@
+.posts-container {
+  margin: 0 auto;
+  padding: 10px 20px;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+}
+
+a {
+  text-decoration: none;
+}
+
+.hide-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.title-td {
+  max-width: 300px;
+}
+
+.body-td {
+  max-width: 400px;
+}
+
+.post-row {
+  transition: background-color 0.5s linear;
+  cursor: pointer;
+}
+
+.post-row:hover {
+  background-color: #eee;
+}

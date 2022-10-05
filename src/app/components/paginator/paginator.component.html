@@ -1,0 +1,11 @@
+<nav style="cursor: pointer;" class="d-flex justify-content-center">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link">Prev</a></li>
+    <ng-container *ngFor="let page of pageElems">
+      <li class="page-item" *ngIf="page.state">
+        <a class="page-link" [ngClass]="page.selected ? 'active' : ''" (click)="onChangePage(page.title)">{{ page.title }}</a>
+      </li>
+    </ng-container>
+    <li class="page-item"><a class="page-link">Next</a></li>
+  </ul>
+</nav>

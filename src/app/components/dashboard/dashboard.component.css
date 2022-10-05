@@ -1,15 +1,16 @@
 .dashboard-container {
   display: flex;
   justify-content: center;
+  align-items: flex-start;
   padding: 15px 3px;
   flex-wrap: wrap;
-  align-items: start;
   height: 100%;
+  position: relative;
 }
 
 .dashboard-card {
-  max-width: 320px;
-  width: 100%;
+  min-width: 320px;
+  width: 30%;
 }
 
 .hide-text {

@@ -3,7 +3,7 @@
   <hr>
   <ul class="nav nav-pills flex-column mb-auto">
     <li *ngFor="let nav of navData" class="nav-item">
-      <a [routerLink]="nav.route" class="nav-link text-white">{{ nav.title }}</a> 
+      <a routerLinkActive="active" [routerLink]="nav.route" class="nav-link text-white">{{ nav.title }}</a> 
       <!-- active -->
     </li>
   </ul>

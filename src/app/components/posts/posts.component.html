@@ -1,1 +1,41 @@
-<p>posts works!</p>
+<div class="posts-container">
+  <app-loader *ngIf="loader"></app-loader>
+  <ng-container *ngIf="!loader">
+    <div class="nav-top mb-3">
+      <ng-container *ngFor="let link of navData">
+        <ng-container *ngIf="link.state">
+          <a [routerLink]="link.route">{{link.title}} / </a>
+        </ng-container>
+        <ng-container *ngIf="!link.state">
+          <span>{{link.title}}</span>
+        </ng-container>
+      </ng-container>
+    </div>
+    <div class="posts-grid">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col" *ngFor="let title of titleTable">{{ title }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="post-row" *ngFor="let row of viewPosts">
+            <th style="text-align: center;" scope="row">{{ row.id }}</th>
+            <td style="text-align: center; color: #0d6efd;">{{ row.userId }}</td>
+            <td style="color: #0d6efd;" class="title-td">
+              <div class="hide-text">{{ row.title }}</div>
+            </td>
+            <td style="color: #0d6efd;" class="body-td">
+              <div class="hide-text">{{ row.body }}</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <app-paginator
+        [paginationData]="storage.posts"
+      >
+
+      </app-paginator>
+    </div>
+  </ng-container>
+</div>
