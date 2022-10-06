@@ -15,7 +15,13 @@
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th scope="col" *ngFor="let title of titleTable">{{ title }}</th>
+            <th scope="col" *ngFor="let header of titleTable" style="position: relative;">
+              <div class="d-flex" #par>
+                <div>{{ header.title }}</div>
+                <div *ngIf="header.state" class="arrow" (click)="onClickSort(header, par)">˄</div>
+                <div *ngIf="!header.state" class="arrow" (click)="onClickSort(header, par)">˅</div>
+              </div>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -33,6 +39,7 @@
       </table>
       <app-paginator
         [paginationData]="storage.posts"
+        (changePageEmit)="onChangePage($event)"
       >
 
       </app-paginator>

@@ -1,11 +1,24 @@
 <nav style="cursor: pointer;" class="d-flex justify-content-center">
   <ul class="pagination">
-    <li class="page-item"><a class="page-link">Prev</a></li>
-    <ng-container *ngFor="let page of pageElems">
-      <li class="page-item" *ngIf="page.state">
-        <a class="page-link" [ngClass]="page.selected ? 'active' : ''" (click)="onChangePage(page.title)">{{ page.title }}</a>
-      </li>
-    </ng-container>
-    <li class="page-item"><a class="page-link">Next</a></li>
+    <li class="page-item"><a class="page-link" (click)="onChangePage(null, null, 'PREV')">Prev</a></li>
+    <li class="page-item" *ngIf="pageElems[0].state">
+      <a class="page-link">...</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" [ngClass]="pageElems[1].selected ? 'active' : ''" (click)="onChangePage(beginPage, 1, 'CLICK')">{{ beginPage }}</a>
+    </li>
+    <li class="page-item" *ngIf="pageElems[2].state">
+      <a class="page-link" [ngClass]="pageElems[2].selected ? 'active' : ''" (click)="onChangePage(beginPage+1, 2, 'CLICK')">{{ beginPage+1 }}</a>
+    </li>
+    <li class="page-item" *ngIf="pageElems[3].state">
+      <a class="page-link" [ngClass]="pageElems[3].selected ? 'active' : ''" (click)="onChangePage(beginPage+2, 3, 'CLICK')">{{ beginPage+2 }}</a>
+    </li>
+    <li class="page-item" *ngIf="pageElems[4].state">
+      <a class="page-link">...</a>
+    </li>
+    <li class="page-item" *ngIf="pageElems[5].state">
+      <a class="page-link" [ngClass]="pageElems[5].selected ? 'active' : ''"  (click)="onChangePage(maxPage, 5, 'MAX')">{{ maxPage }}</a>
+    </li>
+    <li class="page-item"><a class="page-link" (click)="onChangePage(null, null, 'NEXT')">Next</a></li>
   </ul>
 </nav>

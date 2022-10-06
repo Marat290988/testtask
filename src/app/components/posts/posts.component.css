@@ -34,3 +34,13 @@ a {
 .post-row:hover {
   background-color: #eee;
 }
+
+.arrow {
+  cursor: pointer;
+  margin-left: 5px;
+  color: #2299ed;
+}
+
+.d-flex.active .arrow {
+  color: #ffc107;
+}
