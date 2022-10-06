@@ -29,8 +29,6 @@ import { SharedModule } from './shared.module';
       {path: '**', component: DashboardComponent}
     ]),
     NgbModule,
-    FormsModule,
-    ReactiveFormsModule,
     HttpClientModule,
     SharedModule
   ],

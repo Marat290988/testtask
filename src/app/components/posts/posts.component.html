@@ -1,17 +1,17 @@
 <div class="posts-container">
   <app-loader *ngIf="loader"></app-loader>
   <ng-container *ngIf="!loader">
-    <div class="nav-top mb-3">
-      <ng-container *ngFor="let link of navData">
-        <ng-container *ngIf="link.state">
-          <a [routerLink]="link.route">{{link.title}} / </a>
-        </ng-container>
-        <ng-container *ngIf="!link.state">
-          <span>{{link.title}}</span>
-        </ng-container>
-      </ng-container>
-    </div>
     <div class="posts-grid">
+      <div class="search-grid mb-3">
+        <form [formGroup]="formGroup" class="d-flex">
+          <div class="form-group" style="max-width: 320px;">
+            <input type="text" class="form-control" formControlName="search" placeholder="Search">
+          </div>
+          <select formControlName="key" class="form-select" aria-label="Default select example" style="max-width: 320px; margin-left: 10px;">
+            <option *ngFor="let select of titleTable" [value]="select.key">{{select.title}}</option>
+          </select>
+        </form>
+      </div>
       <table class="table table-bordered">
         <thead>
           <tr>
@@ -25,7 +25,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="post-row" *ngFor="let row of viewPosts">
+          <tr class="post-row" *ngFor="let row of viewPosts" (click)="navigateTo(row.id)">
             <th style="text-align: center;" scope="row">{{ row.id }}</th>
             <td style="text-align: center; color: #0d6efd;">{{ row.userId }}</td>
             <td style="color: #0d6efd;" class="title-td">
@@ -38,8 +38,9 @@
         </tbody>
       </table>
       <app-paginator
-        [paginationData]="storage.posts"
+        [paginationData]="allPosts"
         (changePageEmit)="onChangePage($event)"
+        [resetPaginator$]="resetPaginator$"
       >
 
       </app-paginator>

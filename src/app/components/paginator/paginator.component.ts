@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Subject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-paginator',
@@ -8,7 +9,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class PaginatorComponent implements OnInit {
 
   @Input() paginationData!: any[];
+  @Input() resetPaginator$!: Subject<any>;
   @Output() changePageEmit = new EventEmitter();
+  resetSubs!: Subscription;
   currentPage = 1;
   beginPage = 1;
   maxPage!: number;
@@ -17,7 +20,7 @@ export class PaginatorComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.maxPage = this.paginationData.length / 5;
+    this.maxPage = this.paginationData.length / 5 < 1 ? 1 : Math.round(this.paginationData.length / 5);
     this.pageElems = [
       {title: '...', state: false, selected: false},
       {title: this.beginPage, state: true, selected: true},
@@ -26,11 +29,20 @@ export class PaginatorComponent implements OnInit {
       {title: '...', state: true, selected: false},
       {title: this.maxPage, state: true, selected: false}
     ]
+    this.resetSubs = this.resetPaginator$.subscribe(length => {
+      this.currentPage = 1;
+      this.beginPage = 1;
+      this.maxPage = length / 5 < 1 ? 1 : Math.round(length / 5);
+      this.pageSelected(1);
+      this.setPagElems();
+    })
+  }
+
+  ngOnDestroy() {
+    this.resetSubs.unsubscribe();
   }
 
   onChangePage(num: any, index: any, direction: string) {
-    console.log(this.currentPage)
-    console.log(this.maxPage)
     if (direction === 'NEXT' && this.currentPage < this.maxPage-1) {
       this.currentPage++;
       this.changePageEmit.emit(this.currentPage);
@@ -111,6 +123,11 @@ export class PaginatorComponent implements OnInit {
       this.pageElems[4].state = false;
     } else {
       this.pageElems[4].state = true;
+    }
+    if (this.maxPage < 4) {
+      this.pageElems[5].state = false;
+    } else {
+      this.pageElems[5].state = true;
     }
   }
 

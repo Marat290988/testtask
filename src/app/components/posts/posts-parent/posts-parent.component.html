@@ -1,0 +1,17 @@
+<div class="nav-top mb-3" style="margin-left: 15px;">
+  <!-- <ng-container *ngFor="let link of navData">
+    <ng-container *ngIf="link.state">
+      <a [routerLink]="link.route">{{link.title}} / </a>
+    </ng-container>
+    <ng-container *ngIf="!link.state">
+      <span>{{link.title}}</span>
+    </ng-container>
+  </ng-container> -->
+  <a [routerLink]="navData[0].route">{{navData[0].title}} / </a>
+  <a [routerLink]="navData[1].route" *ngIf="postState">{{navData[1].title}} / </a>
+  <a *ngIf="!postState">{{navData[1].title}} </a>
+  <a *ngIf="postState">{{navData[2].title}} / </a>
+</div>
+<router-outlet
+  (activate)="onActivate($event)"
+></router-outlet>

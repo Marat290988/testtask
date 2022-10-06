@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { debounceTime, Subject, Subscription } from 'rxjs';
 import { Post, StorageService } from 'src/app/services/storage.service';
 import { RouteData } from '../sidenav/sidenav.component';
 
@@ -9,11 +12,8 @@ import { RouteData } from '../sidenav/sidenav.component';
 })
 export class PostsComponent implements OnInit {
 
-  navData: RouteData[] = [
-    {title: 'Dashboard', route: '', state: true},
-    {title: 'Posts', route: 'posts', state: false}
-  ]
 
+  formGroup!: FormGroup;
   viewPosts: Post[] = [];
   loader = false;
   titleTable: any[] = [
@@ -23,9 +23,13 @@ export class PostsComponent implements OnInit {
     {title: 'Content', state: false, type: 'STR', key: 'body'}
   ];
   allPosts: any[] = [];
+  resetPaginator$ = new Subject();
+  formSubs!: Subscription;
+  routerSubs!: Subscription;
 
   constructor(
-    public storage: StorageService
+    public storage: StorageService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -42,7 +46,33 @@ export class PostsComponent implements OnInit {
       this.allPosts = [...this.storage.posts];
       this.setViewPosts(1);
     }
-    console.log(this.allPosts)
+    this.formGroup = new FormGroup({
+      search: new FormControl(''),
+      key: new FormControl('id')
+    });
+    this.formSubs = this.formGroup.valueChanges
+      .pipe(
+        debounceTime(1000)
+      )
+      .subscribe(input => {
+        const search = input.search;
+        this.router.navigate(['/posts'], {queryParams: {search: search}});
+      })
+    this.routerSubs = this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const searchParam = urlParams.get('search');
+        const key = this.formGroup.get('key')!.value;
+        this.allPosts = this.storage.posts.filter((post: any) => String(post[key]).indexOf(searchParam!) > -1);
+        this.setViewPosts(1);
+        this.resetPaginator$.next(this.allPosts.length);
+      }
+    })
+  }
+
+  ngOnDestroy() {
+    this.formSubs.unsubscribe();
+    this.routerSubs.unsubscribe();
   }
 
   sortPosts(key: string, stateDirection: boolean, type: string) {
@@ -115,6 +145,7 @@ export class PostsComponent implements OnInit {
       head.state = !state;
       this.sortPosts(head.key, false, head.type);
     }
+    this.resetPaginator$.next(true);
   }
 
   setViewPosts(page: number): void {
@@ -124,6 +155,10 @@ export class PostsComponent implements OnInit {
 
   onChangePage(page: number) {
     this.setViewPosts(page);
+  }
+
+  navigateTo(id: any) {
+    this.router.navigate([`posts/${id}`]);
   }
 
 }
