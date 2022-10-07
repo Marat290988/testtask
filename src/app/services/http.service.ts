@@ -20,4 +20,8 @@ export class HttpService {
   getPhotos(): Observable<Photo[]> {
     return this.http.get<Photo[]>(`${this.host}/photos/`);
   }
+
+  getPhoto(id: any): Observable<Photo> {
+    return this.http.get<Photo>(`${this.host}/photos/${id}`);
+  }
 }

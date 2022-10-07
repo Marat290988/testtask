@@ -145,7 +145,7 @@ export class PostsComponent implements OnInit {
       head.state = !state;
       this.sortPosts(head.key, false, head.type);
     }
-    this.resetPaginator$.next(true);
+    this.resetPaginator$.next(this.allPosts.length);
   }
 
   setViewPosts(page: number): void {

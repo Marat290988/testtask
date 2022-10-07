@@ -1,0 +1,12 @@
+a {
+  text-decoration: none;
+}
+
+.photos-container {
+  margin: 0 auto;
+  padding: 10px 20px;
+  position: relative;
+  height: calc(100% - 40px);
+  width: 100%;
+  overflow-y: auto;
+}

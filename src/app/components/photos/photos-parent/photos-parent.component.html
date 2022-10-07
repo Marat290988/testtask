@@ -1,0 +1,11 @@
+<div class="nav-top mb-3" style="margin-left: 15px;">
+  <a [routerLink]="navData[0].route">{{navData[0].title}} / </a>
+  <a [routerLink]="navData[1].route" *ngIf="postState">{{navData[1].title}} / </a>
+  <a *ngIf="!postState">{{navData[1].title}} </a>
+  <a *ngIf="postState">{{navData[2].title}} </a>
+</div>
+<div class="photos-container">
+  <router-outlet
+    (activate)="onActivate($event)"
+  ></router-outlet>
+</div>

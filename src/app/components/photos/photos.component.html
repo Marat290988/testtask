@@ -1,1 +1,21 @@
-<p>photos works!</p>
+<app-loader *ngIf="loader"></app-loader>
+<ng-container *ngIf="!loader">
+  <h3>Photos</h3>
+  <form [formGroup]="formGroup" class="d-flex">
+    <div class="form-group" style="max-width: 320px;">
+      <input type="text" class="form-control" formControlName="search" placeholder="Search">
+    </div>
+  </form>
+  <div class="d-flex flex-wrap">
+    <div *ngFor="let photo of viewPhotos" class="photo-item" [routerLink]="photo.id.toString()">
+      <img style="min-height: 150px;" [src]="photo.thumbnailUrl">
+      <p class="hide-text">{{photo.title}}</p>
+    </div>
+  </div>
+  <app-paginator 
+    [qty]="12"
+    [paginationData]="allPhotos" 
+    (changePageEmit)="onChangePage($event)"
+    [resetPaginator$]="resetPaginator$">
+  </app-paginator>
+</ng-container>

@@ -10,6 +10,7 @@ export class PaginatorComponent implements OnInit {
 
   @Input() paginationData!: any[];
   @Input() resetPaginator$!: Subject<any>;
+  @Input() qty!: number;
   @Output() changePageEmit = new EventEmitter();
   resetSubs!: Subscription;
   currentPage = 1;
@@ -20,7 +21,7 @@ export class PaginatorComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.maxPage = this.paginationData.length / 5 < 1 ? 1 : Math.round(this.paginationData.length / 5);
+    this.maxPage = this.paginationData.length / this.qty < 1 ? 1 : Math.round(this.paginationData.length / this.qty);
     this.pageElems = [
       {title: '...', state: false, selected: false},
       {title: this.beginPage, state: true, selected: true},
@@ -32,7 +33,7 @@ export class PaginatorComponent implements OnInit {
     this.resetSubs = this.resetPaginator$.subscribe(length => {
       this.currentPage = 1;
       this.beginPage = 1;
-      this.maxPage = length / 5 < 1 ? 1 : Math.round(length / 5);
+      this.maxPage = length / 5 < 1 ? 1 : Math.round(length / this.qty);
       this.pageSelected(1);
       this.setPagElems();
     })

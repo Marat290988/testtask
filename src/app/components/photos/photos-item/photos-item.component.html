@@ -1,0 +1,5 @@
+<app-loader *ngIf="loader"></app-loader>
+<div [ngStyle]="{'display': loader ? 'none' : ''}" class="d-flex flex-column justify-content-center align-items-center">
+  <img #img [src]="photoItem.url" referrerpolicy="no-referrer" style="width: 30%; height: auto;">
+  <p class="mt-4">{{photoItem.title}}</p>
+</div>

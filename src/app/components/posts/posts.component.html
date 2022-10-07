@@ -38,6 +38,7 @@
         </tbody>
       </table>
       <app-paginator
+        [qty]="5"
         [paginationData]="allPosts"
         (changePageEmit)="onChangePage($event)"
         [resetPaginator$]="resetPaginator$"

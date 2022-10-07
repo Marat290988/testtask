@@ -10,7 +10,7 @@
   <a [routerLink]="navData[0].route">{{navData[0].title}} / </a>
   <a [routerLink]="navData[1].route" *ngIf="postState">{{navData[1].title}} / </a>
   <a *ngIf="!postState">{{navData[1].title}} </a>
-  <a *ngIf="postState">{{navData[2].title}} / </a>
+  <a *ngIf="postState">{{navData[2].title}} </a>
 </div>
 <router-outlet
   (activate)="onActivate($event)"
