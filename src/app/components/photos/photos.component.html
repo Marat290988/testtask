@@ -6,7 +6,7 @@
       <input type="text" class="form-control" formControlName="search" placeholder="Search">
     </div>
   </form>
-  <div class="d-flex flex-wrap">
+  <div class="d-flex flex-wrap justify-content-center">
     <div *ngFor="let photo of viewPhotos" class="photo-item" [routerLink]="photo.id.toString()">
       <img style="min-height: 150px;" [src]="photo.thumbnailUrl">
       <p class="hide-text">{{photo.title}}</p>

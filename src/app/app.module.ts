@@ -8,18 +8,20 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared.module';
+import { UserComponent } from './components/user/user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SidenavComponent,
-    DashboardComponent
-    
+    DashboardComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot([
       {path: 'dashboard', component: DashboardComponent},
+      {path: 'user/:id', component: UserComponent},
       {path: 'posts', loadChildren: () => import('./components/posts/posts.module')
         .then(module => module.PostsModule)
       },

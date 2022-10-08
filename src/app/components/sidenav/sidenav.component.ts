@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 
 export type RouteData = {
   title: string,
@@ -13,15 +13,20 @@ export type RouteData = {
 })
 export class SidenavComponent implements OnInit {
 
+  @Output() initNav = new EventEmitter();
+
   navData: {title: string, route: string}[] = [
     {title: 'Dashboard', route: 'dashboard'},
     {title: 'Posts', route: 'posts'},
     {title: 'Photos', route: 'photos'}
   ]
 
-  constructor() { }
+  constructor(
+    private elRef: ElementRef
+  ) { }
 
   ngOnInit(): void {
+    this.initNav.emit(this.elRef);
   }
 
 }

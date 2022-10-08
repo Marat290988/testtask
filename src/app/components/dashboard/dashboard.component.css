@@ -3,7 +3,6 @@
   justify-content: center;
   align-items: flex-start;
   padding: 15px 3px;
-  flex-wrap: wrap;
   height: 100%;
   position: relative;
 }
@@ -33,3 +32,23 @@
 .photo {
   max-width: 81px;
 }
+
+@media(max-width: 1293px) {
+  .dashboard-container {
+    overflow: auto;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: unset;
+  }
+
+  .card.dashboard-card {
+    max-width: 450px;
+    width: 100%;
+    margin-right: 0 !important;
+    margin-bottom: 10px;
+  }
+}
+
+

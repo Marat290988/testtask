@@ -1,0 +1,23 @@
+.user-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 15px 3px;
+  flex-wrap: wrap;
+  height: 100%;
+  position: relative;
+}
+
+.user-card {
+  max-width: 600px;
+  width: 100%;
+}
+
+.max-height {
+  max-height: calc(100% - 30px);
+}
+
+.overflow {
+  height: calc(100% - 40px);
+  overflow-y: auto;
+}

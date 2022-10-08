@@ -161,4 +161,8 @@ export class PostsComponent implements OnInit {
     this.router.navigate([`posts/${id}`]);
   }
 
+  navigateToUser(id: any) {
+    this.router.navigate([`user/${id}`]);
+  }
+
 }

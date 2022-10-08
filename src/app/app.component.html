@@ -1,9 +1,24 @@
 <main class="main">
-  <app-sidenav></app-sidenav>
+  <app-sidenav
+    (initNav)="nav = $event"
+  ></app-sidenav>
   <div class="main-block">
     <div class="main-head text-bg-secondary p-3">
       <p>Welcome to</p>
       <h3>My App</h3>
+      <div class="toggler-container">
+        <div class="toggler" (click)="openNav()">
+          <div class="line"></div>
+          <div class="line"></div>
+          <div class="line"></div>
+        </div>
+      </div>
+      <div class="user-info" *ngIf="userState">
+        <h3>{{userItem.name}}</h3>
+        <p style="color: #fff;">
+          @{{userItem.username}} — {{userItem.email}} — {{userItem.website}} — {{userItem.company.name}} — {{userItem.address.city}}
+        </p>
+      </div>
     </div>
     <div class="router">
       <router-outlet></router-outlet>

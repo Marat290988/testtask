@@ -3,7 +3,7 @@
   padding: 10px 20px;
   position: relative;
   height: calc(100% - 40px);
-  width: 100%;
+  width: calc(100vw - 280px);
   overflow-y: auto;
 }
 
@@ -28,7 +28,6 @@ a {
 
 .post-row {
   transition: background-color 0.5s linear;
-  cursor: pointer;
 }
 
 .post-row:hover {
@@ -43,4 +42,18 @@ a {
 
 .d-flex.active .arrow {
   color: #ffc107;
+}
+
+.link {
+  cursor: pointer;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .posts-container {
+    width: calc(100vw - 10px);
+  }
 }

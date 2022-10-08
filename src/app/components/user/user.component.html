@@ -1,0 +1,14 @@
+<div class="user-container">
+    <app-loader *ngIf="loader"></app-loader>
+    <div class="card user-card me-4 max-height" *ngIf="!loader">
+        <div class="card-header">
+          Posts
+        </div>
+        <div class="card-body overflow">
+          <ng-container *ngFor="let post of userPosts">
+            <div class="hide-text" style="color: rgb(3, 141, 221)">{{post.title}}</div>
+            <div class="hide-text mb-1">{{post.body}}</div>
+          </ng-container>
+        </div>
+      </div>
+</div>

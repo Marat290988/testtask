@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from 'src/app/services/http.service';
 import { map, Observable, Subject, switchMap } from 'rxjs';
+import { User } from '../components/user/user.component';
 
 export type Post = {userId: number, id: number, title: string, body: string};
 export type Photo = {albumId: number, id: number, thumbnailUrl: string, title: string, url: string};
@@ -11,6 +12,7 @@ export type Photo = {albumId: number, id: number, thumbnailUrl: string, title: s
 export class StorageService {
 
   postIdChange = new Subject();
+  userChange = new Subject<User | boolean>();
 
   constructor(
     private httpService: HttpService
